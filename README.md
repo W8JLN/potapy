@@ -1,6 +1,26 @@
 # potapy
 Uses Python to transform your CSV data from pota.app in to something a bit more graphical. Supports uploading activator logs as well as hunter logs.
 
+### Installation
+
+Requires Python to be installed. Install requirements:
+
+```
+pip install -r requirements.txt
+```
+
+Launch from command line:
+
+```
+python potapy.app
+```
+
+Access the web console:
+
+```
+http://127.0.0.1:8050/
+```
+
 ### Activator Log
 
 Shows basic info about activations:
