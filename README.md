@@ -10,6 +10,16 @@ Shows basic info about activations:
 - Avg QSOs per Activation
 - Total Parks Activated
 
-Also includes a map that shows activated parks with stats (may not always be able to locate park to map)
+Also includes a map that shows activated parks with stats (may not always be able to locate the park to put on the map - will show as failed to locate below the map)
+
+### Hunter Log
+
+Shows basic info about hunts:
+- Total hunter QSOs
+- Total Parks Hunted
+- Most Common US States Hunted (app assumes you are in US)
+- Most Common DX Countries Hunted (app assumes you are in US)
+
+Same as Activator, shows a map of hunted parks, along with same issue of not loading all parks on the map
 
 
