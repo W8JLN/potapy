@@ -9,4 +9,7 @@ Shows basic info about activations:
 - Attempts vs Success
 - Avg QSOs per Activation
 - Total Parks Activated
-- 
+
+Also includes a map that shows activated parks with stats (may not always be able to locate park to map)
+
+
