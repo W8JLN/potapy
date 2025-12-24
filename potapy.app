@@ -190,8 +190,8 @@ def update_dashboard(contents, filename, callsign, log_type):
             create_summary_card("Total Activations", total_activations, "success", "check-circle"),
             create_summary_card("Total QSOs", total_qsos, "info", "antenna"),
             create_summary_card(
-                "Attempts vs Success",
-                f"Success: {total_activations}, Failed: {failed_activations}",
+                "Parks Activated (Most → Least)",
+                total_parks,
                 "warning",
                 "bar-chart"
             ),
@@ -199,19 +199,30 @@ def update_dashboard(contents, filename, callsign, log_type):
             create_summary_card("Total Parks Activated", total_parks, "secondary", "geo-alt"),
         ], justify="around")
 
+        # Replace Attempts vs Success with ranking of parks activated most-to-least
+        park_activation_df = (
+            df.groupby("Park Name", as_index=False)["Activations"]
+            .sum()
+            .sort_values("Activations", ascending=True)
+        )
+
         attempts_success_fig = px.bar(
-            x=["Successful Activations", "Failed Activations"],
-            y=[total_activations, failed_activations],
-            text=[total_activations, failed_activations],
-            title="Activation Attempts vs Success",
-            color=["Successful Activations", "Failed Activations"],
-            color_discrete_map={"Successful Activations": "green", "Failed Activations": "red"},
-            labels={"x": "Status", "y": "Count"}
+            park_activation_df,
+            x="Activations",
+            y="Park Name",
+            orientation="h",
+            text="Activations",
+            title="Parks Activated (Most → Least)",
+            labels={"Activations": "# Activations", "Park Name": "Park"}
         )
 
         attempts_success_fig.update_traces(textposition="outside")
-        attempts_success_fig.update_layout(yaxis_range=[0, max(total_attempts * 1.1, 1)])
+        attempts_success_fig.update_layout(
+            margin=dict(l=0, r=20, t=40, b=40),
+            yaxis={"categoryorder": "total ascending"}
+        )
 
+        # Keep QSOs per park graph as before
         qsos_per_park_fig = px.bar(
             df.sort_values("QSOs", ascending=True),
             x="QSOs",
