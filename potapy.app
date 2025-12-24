@@ -190,8 +190,8 @@ def update_dashboard(contents, filename, callsign, log_type):
             create_summary_card("Total Activations", total_activations, "success", "check-circle"),
             create_summary_card("Total QSOs", total_qsos, "info", "antenna"),
             create_summary_card(
-                "Parks Activated (Most → Least)",
-                total_parks,
+                "Attempts vs Success",
+                f"Success: {total_activations}, Failed: {failed_activations}",
                 "warning",
                 "bar-chart"
             ),
@@ -199,7 +199,7 @@ def update_dashboard(contents, filename, callsign, log_type):
             create_summary_card("Total Parks Activated", total_parks, "secondary", "geo-alt"),
         ], justify="around")
 
-        # Replace Attempts vs Success with ranking of parks activated most-to-least
+        # NEW: Parks Activated graph (most → least)
         park_activation_df = (
             df.groupby("Park Name", as_index=False)["Activations"]
             .sum()
@@ -222,7 +222,6 @@ def update_dashboard(contents, filename, callsign, log_type):
             yaxis={"categoryorder": "total ascending"}
         )
 
-        # Keep QSOs per park graph as before
         qsos_per_park_fig = px.bar(
             df.sort_values("QSOs", ascending=True),
             x="QSOs",
