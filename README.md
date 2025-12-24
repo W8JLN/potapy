@@ -3,7 +3,9 @@ Uses Python to transform your CSV data from pota.app in to something a bit more 
 
 ### Installation
 
-Requires Python to be installed. Install requirements:
+Requires Python to be installed.
+
+Install required Python stuff:
 
 ```
 pip install -r requirements.txt
